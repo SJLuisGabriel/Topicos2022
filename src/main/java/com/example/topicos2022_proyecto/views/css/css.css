@@ -1,0 +1,103 @@
+#BtnsCajaV {
+    -fx-background-color: #008287;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsRaiz {
+    -fx-background-color: #79CC2B;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsFlowP {
+    -fx-background-color: #9ED89E;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsFlowPV {
+    -fx-background-color: #0832F7;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsGrPane {
+    -fx-background-color: #27E7E0;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsStackP {
+    -fx-background-color: #F70808;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsAnchorPane {
+    -fx-background-color: #A81EE3;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Times New Roman";
+    -fx-font-style: italic;
+    -fx-font-size: 13px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+}
+
+#BtnsLoteria {
+    -fx-background-color: #008287;
+    -fx-border-color: #FFFFFF;
+    -fx-border-width: 2;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Candara";
+    -fx-font-style: italic;
+    -fx-font-size: 22px;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+ }
+
+ #btnPlantilla {
+    -fx-background-color: #A5D6A7;
+    -fx-border-color: #000000;
+    -fx-border-width: 2;
+    -fx-background-radius: 10 10 10 10;
+    -fx-border-radius: 10 10 10 10;
+ }
