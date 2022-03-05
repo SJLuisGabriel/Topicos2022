@@ -32,37 +32,37 @@ public class loteria extends Stage {
     private GridPane gdpPlantilla;
     private Image imgCarta;
     private Scene escena;
-    private Button [][] arBtnCartas = new Button[3][3];
+    private Button [][] arBtnCartas = new Button[4][4];
     private File file, file2;
-    private int a = 0, b = 1, c = 0, Ncarta = 9, d = 0, contadorMazoIgual = 0, cnttiempS2 = 0, cnttiempS1 = 0;
+    private int a = 0, b = 1, c = 0, x = 0, Ncarta = 16, d = 0, contadorMazoIgual = 0, cnttiempS2 = 0, cnttiempS1 = 0;
     private int cnttiempM2 = 0, cnttiempM1 = 0;
-    int [] aleatorios = new int [54];
+    int [] aleatorios = new int [64];
     private Timer timer,timeTiempo;
     private boolean empezar = false, termino = false;
     private String [] arImagenes = {"anubis.jpg","ares.jpg","artemisa.jpg","atenea.jpg","azazel.jpg",
-            "basilisco.jpg","cerbero.jpg","chimera.png","cronos.jpg",//1
-            "cthulhu.jpg","djinn.jpg","dragon.jpg","fenrir.jpg","freya.jpg", "ganesha.png","grifo.jpg","hades.jpg",
-            "hefesto.jpg",//2
-            "hela.jpg","hercules.jpg","hermes.jpg","hlobo.jpg","hydra.jpg","isis.jpg", "jinetes.jpg",
-            "jormungandr.jpg","leviatan.jpg",//3
-            "loki.jpg","medusa.jpg","mictlantecuhtli.png","minotauro.jpg", "odin.jpg","osiris.jpg",
-            "poseidon.jpg","prometeo.jpg","quetzalcoatl.jpg",//4
-            "ra.png","rakshasa.jpg","shiva.jpg","sirena.jpg", "wendigo.jpg","wukong.png","xipetotec.jpg",
-            "ymir.jpg","zeus.jpg",//5
-            "unicornio.jpg","oni.jpg","manticora.jpg","kraken.jpg","hipocampos.jpg","golem.jpg","esfinge.jpg",
-            "ciclope.jpg","centauro.jpg",//6
+            "basilisco.jpg","cerbero.jpg","chimera.png","cronos.jpg", "cthulhu.jpg","djinn.jpg","dragon.jpg",
+            "fenrir.jpg","freya.jpg", "ganesha.png","grifo.jpg", //1
+            "hades.jpg", "hefesto.jpg","hela.jpg", "hercules.jpg","hermes.jpg","hlobo.jpg","hydra.jpg",
+            "isis.jpg","jinetes.jpg","jormungandr.jpg","leviatan.jpg","loki.jpg","medusa.jpg",
+            "mictlantecuhtli.png", "minotauro.jpg", "odin.jpg",//2
+            "osiris.jpg", "poseidon.jpg","prometeo.jpg","quetzalcoatl.jpg","ra.png","rakshasa.jpg",
+            "shiva.jpg","sirena.jpg", "wendigo.jpg","wukong.png","xipetotec.jpg","ymir.jpg","zeus.jpg",
+            "unicornio.jpg","oni.jpg","manticora.jpg",//3
+            "kraken.jpg","hipocampos.jpg","golem.jpg","esfinge.jpg","ciclope.jpg","centauro.jpg","kappa.jpg",
+            "Yamata-no-Orochi.jpg","ent.jpg","fenix.jpg","aqrabuamelu.jpg","duende.jpg","Helhest.jpg",
+            "momia.jpg","Serpopardo.jpg","apofis.jpg",//4
             "Adorso.jpg"};
 
     private String [] arNombresCartas = {"ANUBIS","ARES","ARTEMISA","ATENEA","AZAZEL","BASILISCO","CERBERO","CHIMERA","CRONOS","CTHULHU",
             "DJINN","DRAGON","FENRIR","FREYA","GANESHA","GRIFO","HADES","HEFESTO","HELA","HERACLES","HERMES","HOMBRE LOBO","HYDRA","ISIS",
             "JINETES DEL APOCALIPSIS","JORMUNGANDR","LEVIATAN","LOKI","MEDUSA","MICTLANTECUHTLI","MINOTAURO","ODIN","OSIRIS","POSEIDON",
             "PROMETEO","QUETZALCOATL","RA","RAKSHASA","SHIVA","SIRENA","WENDIGO","WUKONG","XIPETOTEC","YMIR","ZEUS","UNICORNIO","ONI",
-            "MANTICORA","KRAKEN","HIPOCAMPOS","GOLEM","ESFINGE","CICLOPE","CENTAURO"};
+            "MANTICORA","KRAKEN","HIPOCAMPOS","GOLEM","ESFINGE","CICLOPE","CENTAURO","KAPPA","YAMATA-NO-OROCHI","ENT","FENIX",
+            "AQRABUAMELU","DUENDE","HELHEST","MOMIA","SERPOPARDO","APOFIS","FINISH"};
 
     public loteria(){
         CrearUI();
         this.setTitle("Loteria");
-
         this.setScene(escena);
         this.show();
     }
@@ -85,38 +85,38 @@ public class loteria extends Stage {
         btnAtras.setId("BtnsLoteria");
         btnSiguiente.setId("BtnsLoteria");
 
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
                 arBtnCartas [j][i] = new Button();
-                arBtnCartas [j][i].setPrefSize(200,180);
+                arBtnCartas [j][i].setPrefSize(175,140);
                 file = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[a]);
                 imgCarta = new Image(file.toURI().toString());
                 ImageView view = new ImageView(imgCarta);
-                view.setFitHeight(170);
-                view.setFitWidth(150);
+                view.setFitHeight(130);
+                view.setFitWidth(130);
                 view.setPreserveRatio(true);
                 arBtnCartas [j][i].setGraphic(view);
                 int numj = j, numi = i;
                 arBtnCartas [j][i].setOnAction(event -> {Comparar(numi,numj); Parar();});
                 arBtnCartas[j][i].setId("btnPlantilla");
-                gdpPlantilla.add(arBtnCartas[j][i],i,j);
+                gdpPlantilla.add(arBtnCartas[j][i],j,i);
                 a++;
             }
         }
 
         btnSiguiente.setOnAction(event -> {
             b++;
-            if (b > 6) b = 1;
+            if (b > 4) b = 1;
             CambioDPl();
         });
 
         btnAtras.setOnAction(event -> {
             b--;
-            if (b < 1) b = 6;
+            if (b < 1) b = 4;
             CambioDPl();
         });
 
-        file2 = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[54]);
+        file2 = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[64]);
         imgCarta = new Image(file2.toURI().toString());
         ImageView view = new ImageView(imgCarta);
 
@@ -155,7 +155,7 @@ public class loteria extends Stage {
         lblCarta.setStyle("-fx-background-radius: 40 40 40 40");
 
         vBox.getChildren().addAll(hBox1,hBox2);
-        escena = new Scene(vBox,880,615);
+        escena = new Scene(vBox,970,635);
         File filecss = new File("src/main/java/com/example/topicos2022_proyecto/views/css/css.css");
         escena.getStylesheets().add(filecss.toURI().toString());
     }
@@ -163,21 +163,19 @@ public class loteria extends Stage {
     public void CambioDPl(){
         switch (b) {
             case 1: Ncarta = 0; break;
-            case 2: Ncarta = 9; break;
-            case 3: Ncarta = 18; break;
-            case 4: Ncarta = 27; break;
-            case 5: Ncarta = 36; break;
-            case 6: Ncarta = 45; break;
+            case 2: Ncarta = 16; break;
+            case 3: Ncarta = 32; break;
+            case 4: Ncarta = 48; break;
         }
 
-        for (int i = 0; i < 3; i++){
-            for (int j = 0; j < 3; j++){
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
                 file = new File(
                         "src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[Ncarta]);
                 imgCarta = new Image(file.toURI().toString());
                 ImageView view = new ImageView(imgCarta);
-                view.setFitHeight(170);
-                view.setFitWidth(150);
+                view.setFitHeight(130);
+                view.setFitWidth(130);
                 view.setPreserveRatio(true);
                 arBtnCartas [j][i].setGraphic(view);
                 Ncarta++;
@@ -187,7 +185,7 @@ public class loteria extends Stage {
 
     public void CartaAleatorio(){
 
-        int cantidad = 54, index = 0;
+        int cantidad = 64, index = 0;
 
         while(index < cantidad) {
             int propuesto = (int)(Math.random()*cantidad);
@@ -209,55 +207,31 @@ public class loteria extends Stage {
 
     public void TimerCarta (){
 
-        timeTiempo = new Timer(1000, new ActionListener(){
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                Platform.runLater(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                cnttiempS2++;
-                                if (cnttiempS2 == 10) {
-                                    cnttiempS1++;
-                                    cnttiempS2 = 0;
-                                    if (cnttiempS1 == 6) {
-                                        cnttiempS1 = 0;
-                                        cnttiempM2++;
-                                        if (cnttiempM2 == 10) {
-                                            cnttiempM2 = 0;
-                                            cnttiempM1++;
-                                        }
-                                    }
-                                }
-                                lblTiempo.setText("Tiempo De Juego: " + cnttiempM1 + "" + cnttiempM2 + ":" + cnttiempS1 + cnttiempS2);
-                            }
-                        }
-                );
-            }
-        });
-
-        timer = new Timer(2000, new ActionListener(){
+        timer = new Timer(3000, new ActionListener(){
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e) {
                 Platform.runLater(
                     new Runnable() {
                         @Override
                         public void run() {
-                            if (c <= 54) {
+                            if(c <= 63) {
                                 file2 = new File(
-                                        "src/main/java/com/example/topicos2022_proyecto/images/" +
-                                                arImagenes[aleatorios[c]]);
-                                imgCarta = new Image(file2.toURI().toString());
-                                ImageView view2 = new ImageView(imgCarta);
-                                view2.setFitWidth(200);
-                                view2.setFitHeight(200);
-                                view2.setPreserveRatio(true);
-                                lblCarta.setGraphic(view2);
+                                        "src/main/java/com/example/topicos2022_proyecto/images/" + arImagenes[aleatorios[c]]);
                                 lblNombreCarta.setText(arNombresCartas[aleatorios[c]]);
-                                lblNombreCarta.widthProperty();
+                            }else {
+                                file2 = new File(
+                                        "src/main/java/com/example/topicos2022_proyecto/images/" + arImagenes[64]);
                             }
+                            imgCarta = new Image(file2.toURI().toString());
+                            ImageView view2 = new ImageView(imgCarta);
+                            view2.setFitWidth(200);
+                            view2.setFitHeight(200);
+                            view2.setPreserveRatio(true);
+                            lblCarta.setGraphic(view2);
+                            lblNombreCarta.widthProperty();
                             c++;
-                            if (c == 54) { termino = true; Parar(); }
+                            x++;
+                            if (x == 66) { termino = true; Parar(); }
                         }
                     }
                 );
@@ -265,7 +239,6 @@ public class loteria extends Stage {
         });
 
         timer.start();
-        timeTiempo.start();
     }
 
     public void Parar (){
@@ -273,8 +246,7 @@ public class loteria extends Stage {
         if (termino) {
             String resultado = "";
             timer.stop();
-            timeTiempo.stop();
-            if ( contadorMazoIgual == 9) {
+            if ( contadorMazoIgual == 16) {
                 resultado = "LOTERIAA!!!!!!!! \nGanaste!!!!";
                 playSound();
             }else {
@@ -295,31 +267,43 @@ public class loteria extends Stage {
             switch (i){
                 case 0:
                     switch (j){
-                        case 0: quitar = 9; break;
-                        case 1: quitar = 8; break;
-                        case 2: quitar = 7; break;
+                        case 0: quitar = 16; break;
+                        case 1: quitar = 15; break;
+                        case 2: quitar = 14; break;
+                        case 3: quitar = 13; break;
                     } break;
                 case 1:
                     switch (j){
-                        case 0: quitar = 6; break;
-                        case 1: quitar = 5; break;
-                        case 2: quitar = 4; break;
+                        case 0: quitar = 12; break;
+                        case 1: quitar = 11; break;
+                        case 2: quitar = 10; break;
+                        case 3: quitar = 9; break;
                     }break;
                 case 2:
                     switch (j){
-                        case 0: quitar = 3; break;
-                        case 1: quitar = 2; break;
-                        case 2: quitar = 1; break;
+                        case 0: quitar = 8; break;
+                        case 1: quitar = 7; break;
+                        case 2: quitar = 6; break;
+                        case 3: quitar = 5; break;
+                    }break;
+               case 3:
+                    switch (j){
+                        case 0: quitar = 4; break;
+                        case 1: quitar = 3; break;
+                        case 2: quitar = 2; break;
+                        case 3: quitar = 1; break;
                     }break;
             }
+
             File fileC = new File(
                     "src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[Ncarta-quitar]);
+
             arBtnCartas[j][i].setOnAction(event -> {
 
                 if (file2.equals(fileC)) {
                     CambioDorso(i,j);
                     contadorMazoIgual++;
-                    if (contadorMazoIgual == 9) {
+                    if (contadorMazoIgual == 16) {
                         termino = true;
                         Parar();
                     }
@@ -330,11 +314,11 @@ public class loteria extends Stage {
 
     public void CambioDorso (int i, int j){
 
-        File fileDC = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[54]);
+        File fileDC = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[64]);
         imgCarta = new Image(fileDC.toURI().toString());
         ImageView view = new ImageView(imgCarta);
-        view.setFitHeight(170);
-        view.setFitWidth(150);
+        view.setFitHeight(130);
+        view.setFitWidth(130);
         view.setPreserveRatio(true);
         arBtnCartas [j][i].setGraphic(view);
     }
@@ -342,7 +326,7 @@ public class loteria extends Stage {
     public void playSound() {
         try {
             String archAudio = "";
-            if (contadorMazoIgual == 9) archAudio = "src/main/java/com/example/topicos2022_proyecto/sounds/nike_to_victory.wav";
+            if (contadorMazoIgual == 16) archAudio = "src/main/java/com/example/topicos2022_proyecto/sounds/nike_to_victory.wav";
             else archAudio = "src/main/java/com/example/topicos2022_proyecto/sounds/tyr_still_not_funny.wav";
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(archAudio).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
