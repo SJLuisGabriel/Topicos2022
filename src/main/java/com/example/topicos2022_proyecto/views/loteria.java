@@ -28,16 +28,15 @@ public class loteria extends Stage {
     private VBox vBox, vBox1;
     private HBox hBox1, hBox2;
     private Button btnAtras, btnSiguiente, btnSeleccionar;
-    private Label lblNombreCarta, lblCarta, lblTiempo;
+    private Label lblNombreCarta, lblCarta;
     private GridPane gdpPlantilla;
     private Image imgCarta;
     private Scene escena;
     private Button [][] arBtnCartas = new Button[4][4];
     private File file, file2;
-    private int a = 0, b = 1, c = 0, x = 0, Ncarta = 16, d = 0, contadorMazoIgual = 0, cnttiempS2 = 0, cnttiempS1 = 0;
-    private int cnttiempM2 = 0, cnttiempM1 = 0;
-    int [] aleatorios = new int [64];
-    private Timer timer,timeTiempo;
+    private int a = 0, b = 1, c = 0, x = 0, Ncarta = 16, d = 0, contadorMazoIgual = 0;
+    int [] aleatorios = new int [80];
+    private Timer timer;
     private boolean empezar = false, termino = false;
     private String [] arImagenes = {"anubis.jpg","ares.jpg","artemisa.jpg","atenea.jpg","azazel.jpg",
             "basilisco.jpg","cerbero.jpg","chimera.png","cronos.jpg", "cthulhu.jpg","djinn.jpg","dragon.jpg",
@@ -51,14 +50,20 @@ public class loteria extends Stage {
             "kraken.jpg","hipocampos.jpg","golem.jpg","esfinge.jpg","ciclope.jpg","centauro.jpg","kappa.jpg",
             "Yamata-no-Orochi.jpg","ent.jpg","fenix.jpg","aqrabuamelu.jpg","duende.jpg","Helhest.jpg",
             "momia.jpg","Serpopardo.jpg","apofis.jpg",//4
+            "chupacabras.jpg","potianak.jpg","banshee.jpg","vampiro.jpg","dybbuk.jpg","caronte.jpg",
+            "eurinomo.jpg","grayas.jpg","hecatonquiros.jpg","keres.jpg","skolopendra.jpg","sleipnir.jpg",
+            "nidhogg.jpg","tanukki.jpg","kitsune.jpg","jorogumo.jpg", // 5
             "Adorso.jpg"};
 
-    private String [] arNombresCartas = {"ANUBIS","ARES","ARTEMISA","ATENEA","AZAZEL","BASILISCO","CERBERO","CHIMERA","CRONOS","CTHULHU",
-            "DJINN","DRAGON","FENRIR","FREYA","GANESHA","GRIFO","HADES","HEFESTO","HELA","HERACLES","HERMES","HOMBRE LOBO","HYDRA","ISIS",
-            "JINETES DEL APOCALIPSIS","JORMUNGANDR","LEVIATAN","LOKI","MEDUSA","MICTLANTECUHTLI","MINOTAURO","ODIN","OSIRIS","POSEIDON",
-            "PROMETEO","QUETZALCOATL","RA","RAKSHASA","SHIVA","SIRENA","WENDIGO","WUKONG","XIPETOTEC","YMIR","ZEUS","UNICORNIO","ONI",
-            "MANTICORA","KRAKEN","HIPOCAMPOS","GOLEM","ESFINGE","CICLOPE","CENTAURO","KAPPA","YAMATA-NO-OROCHI","ENT","FENIX",
-            "AQRABUAMELU","DUENDE","HELHEST","MOMIA","SERPOPARDO","APOFIS","FINISH"};
+    private String [] arNombresCartas = {"ANUBIS","ARES","ARTEMISA","ATENEA","AZAZEL","BASILISCO","CERBERO","CHIMERA",
+            "CRONOS","CTHULHU","DJINN","DRAGON","FENRIR","FREYA","GANESHA","GRIFO","HADES","HEFESTO","HELA","HERACLES",
+            "HERMES","HOMBRE LOBO","HYDRA","ISIS","JINETES DEL APOCALIPSIS","JORMUNGANDR","LEVIATAN","LOKI","MEDUSA",
+            "MICTLANTECUHTLI","MINOTAURO","ODIN","OSIRIS","POSEIDON","PROMETEO","QUETZALCOATL","RA","RAKSHASA","SHIVA",
+            "SIRENA","WENDIGO","WUKONG","XIPETOTEC","YMIR","ZEUS","UNICORNIO","ONI","MANTICORA","KRAKEN","HIPOCAMPOS",
+            "GOLEM","ESFINGE","CICLOPE","CENTAURO","KAPPA","YAMATA-NO-OROCHI","ENT","FENIX","AQRABUAMELU","DUENDE",
+            "HELHEST","MOMIA","SERPOPARDO","APOFIS","CHUPACABRAS","POTIANAK","BANSHEE","VAMPIRO","DYBBUK","CARONTE",
+            "EURINOMO","GRAYAS","HECATONQUIROS","KERES","SKOLOPENDRA","SLEIPNIR","NIDHOGG","TANUKKI","KITSUNE",
+            "JOROGUMO", "FINISH"};
 
     public loteria(){
         CrearUI();
@@ -73,7 +78,6 @@ public class loteria extends Stage {
         btnSeleccionar = new Button("Seleccionar Plantilla");
         lblNombreCarta = new Label("");
         lblCarta = new Label();
-        lblTiempo = new Label("Tiempo De Juego: 00:00");
         vBox = new VBox();
         hBox1 = new HBox();
         hBox2 = new HBox();
@@ -106,17 +110,17 @@ public class loteria extends Stage {
 
         btnSiguiente.setOnAction(event -> {
             b++;
-            if (b > 4) b = 1;
+            if (b > 5) b = 1;
             CambioDPl();
         });
 
         btnAtras.setOnAction(event -> {
             b--;
-            if (b < 1) b = 4;
+            if (b < 1) b = 5;
             CambioDPl();
         });
 
-        file2 = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[64]);
+        file2 = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[80]);
         imgCarta = new Image(file2.toURI().toString());
         ImageView view = new ImageView(imgCarta);
 
@@ -140,7 +144,7 @@ public class loteria extends Stage {
         });
 
         hBox1.getChildren().addAll(btnAtras,btnSiguiente);
-        vBox1.getChildren().addAll(lblTiempo,lblNombreCarta,lblCarta,btnSeleccionar);
+        vBox1.getChildren().addAll(lblNombreCarta,lblCarta,btnSeleccionar);
         hBox2.getChildren().addAll(gdpPlantilla,vBox1);
 
         vBox.setStyle("-fx-background-color:#4CAF50");
@@ -166,6 +170,7 @@ public class loteria extends Stage {
             case 2: Ncarta = 16; break;
             case 3: Ncarta = 32; break;
             case 4: Ncarta = 48; break;
+            case 5: Ncarta = 64; break;
         }
 
         for (int i = 0; i < 4; i++){
@@ -185,7 +190,7 @@ public class loteria extends Stage {
 
     public void CartaAleatorio(){
 
-        int cantidad = 64, index = 0;
+        int cantidad = 80, index = 0;
 
         while(index < cantidad) {
             int propuesto = (int)(Math.random()*cantidad);
@@ -214,13 +219,15 @@ public class loteria extends Stage {
                     new Runnable() {
                         @Override
                         public void run() {
-                            if(c <= 63) {
+                            if(c <= 79) {
                                 file2 = new File(
-                                        "src/main/java/com/example/topicos2022_proyecto/images/" + arImagenes[aleatorios[c]]);
+                                        "src/main/java/com/example/topicos2022_proyecto/images/" +
+                                                arImagenes[aleatorios[c]]);
                                 lblNombreCarta.setText(arNombresCartas[aleatorios[c]]);
                             }else {
                                 file2 = new File(
-                                        "src/main/java/com/example/topicos2022_proyecto/images/" + arImagenes[64]);
+                                        "src/main/java/com/example/topicos2022_proyecto/images/" +
+                                                arImagenes[80]);
                             }
                             imgCarta = new Image(file2.toURI().toString());
                             ImageView view2 = new ImageView(imgCarta);
@@ -231,7 +238,7 @@ public class loteria extends Stage {
                             lblNombreCarta.widthProperty();
                             c++;
                             x++;
-                            if (x == 66) { termino = true; Parar(); }
+                            if (x == 81) { termino = true; Parar(); }
                         }
                     }
                 );
@@ -314,7 +321,7 @@ public class loteria extends Stage {
 
     public void CambioDorso (int i, int j){
 
-        File fileDC = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[64]);
+        File fileDC = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[80]);
         imgCarta = new Image(fileDC.toURI().toString());
         ImageView view = new ImageView(imgCarta);
         view.setFitHeight(130);
@@ -326,7 +333,8 @@ public class loteria extends Stage {
     public void playSound() {
         try {
             String archAudio = "";
-            if (contadorMazoIgual == 16) archAudio = "src/main/java/com/example/topicos2022_proyecto/sounds/nike_to_victory.wav";
+            if (contadorMazoIgual == 16) archAudio =
+                    "src/main/java/com/example/topicos2022_proyecto/sounds/nike_to_victory.wav";
             else archAudio = "src/main/java/com/example/topicos2022_proyecto/sounds/tyr_still_not_funny.wav";
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(archAudio).getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
