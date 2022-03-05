@@ -310,6 +310,7 @@ public class loteria extends Stage {
                 if (file2.equals(fileC)) {
                     CambioDorso(i,j);
                     contadorMazoIgual++;
+                    arBtnCartas[j][i].setDisable(true);
                     if (contadorMazoIgual == 16) {
                         termino = true;
                         Parar();
