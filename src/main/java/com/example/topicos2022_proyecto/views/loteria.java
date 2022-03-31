@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -92,12 +91,12 @@ public class loteria extends Stage {
         for (int i = 0; i < 4; i++){
             for (int j = 0; j < 4; j++){
                 arBtnCartas [j][i] = new Button();
-                arBtnCartas [j][i].setPrefSize(175,140);
+                arBtnCartas [j][i].setPrefSize(175,140); // Para dar tamaño a los botones
                 file = new File("src/main/java/com/example/topicos2022_proyecto/images/"+arImagenes[a]);
                 imgCarta = new Image(file.toURI().toString());
                 ImageView view = new ImageView(imgCarta);
-                view.setFitHeight(130);
-                view.setFitWidth(130);
+                view.setFitHeight(130); // para dar tamaño a la imagen
+                view.setFitWidth(130); // para dar tamaño a la imagen
                 view.setPreserveRatio(true);
                 arBtnCartas [j][i].setGraphic(view);
                 int numj = j, numi = i;
@@ -236,8 +235,7 @@ public class loteria extends Stage {
                             view2.setPreserveRatio(true);
                             lblCarta.setGraphic(view2);
                             lblNombreCarta.widthProperty();
-                            c++;
-                            x++;
+                            c++; x++;
                             if (x == 81) { termino = true; Parar(); }
                         }
                     }
@@ -245,7 +243,7 @@ public class loteria extends Stage {
             }
         });
 
-        timer.start();
+        timer.start(); // Con este codigo se inicia el timer, timer.stop() y con este se para
     }
 
     public void Parar (){
