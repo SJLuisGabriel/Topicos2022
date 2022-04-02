@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class Conexion {
 
-    private static String server = "localhost";
+    private static String server = "127.0.0.1";
     private static String user = "gabosj";
     private static String pwd = "852741";
     private static String db = "taqueriadb";

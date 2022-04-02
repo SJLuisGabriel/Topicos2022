@@ -33,12 +33,12 @@ public class HelloApplication extends Application implements EventHandler {
     public void start(Stage primaryStage) {
 
         //primaryStage.addEventHandler(WindowEvent.WINDOW_SHOWING,this);
-        //new Parseador();
+        new Parseador();
         CrearUI();
-        primaryStage.setScene(escena);
+        //primaryStage.setScene(escena);
         //primaryStage.setMaximized(true);
         primaryStage.setTitle("Formulario Principal");
-        primaryStage.show();
+        //primaryStage.show();
     }
 
     private void CrearUI() {

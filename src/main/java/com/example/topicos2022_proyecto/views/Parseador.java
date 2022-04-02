@@ -29,9 +29,10 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
     private TextArea txtEntrada,txtSalida;
     private FileChooser flcArchivo;
     private String documento = "";
-    private String getTxt = "";
-    private String imprimir = "", mostrar = "", imprimirbe = "";
-    private String comp = "";
+    private String getTxt = "", cambiarTxt = "";
+    private String imprimir = "", mostrar = "", imprimir2 = "";
+    private String comp = "", aux = "";
+    private int cont = 0;
 
     public Parseador(){
         CrearUI();
@@ -72,7 +73,6 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
         //txtEntrada.setOnKeyTyped(this);
 
         btnConvertir.setOnAction(event -> {
-            getTxt = txtEntrada.getText();
             Morse();
         });
 
@@ -88,6 +88,7 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
     }
 
     private void Morse() {
+        getTxt = txtEntrada.getText();
         char[] aCaracteres = getTxt.toCharArray();
         imprimir = "";
 
@@ -101,40 +102,37 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
     @Override
     public void handle(KeyEvent event) {
         String caracter = event.getCode().toString();
-        //System.out.println(caracter);
+        System.out.println(caracter);
         CodigoMorse(caracter);
         txtSalida.setText(imprimir);
     }
 
     private void backspace(){
-        getTxt = txtEntrada.getText().toUpperCase();
+
+        char[] charComp = mostrar.toCharArray();
+        mostrar = aux;
         imprimir = "";
 
-        char[] caracters = getTxt.toCharArray();
-
-        for (int i = 0; i < caracters.length; i++){
-            comp = String.valueOf(caracters[i]);
+        for (int i = 0; i < charComp.length - cont; i++){
+            aux += charComp[i];
+            comp = String.valueOf(charComp[i]);
+            if (charComp[i] == '/') imprimir += "\n";
+            if (charComp[i] == ' ') imprimir += "";
             CodigoMorse(comp);
         }
-    }
 
-    public void enter(){
-        getTxt = txtSalida.getText();
-        char []caracterchar = mostrar.toCharArray();
-        for (int i = 0; i < caracterchar.length ; i++){
-            if (caracterchar[i] == '/'){
-                imprimirbe += "\n";
-            }
-
-            imprimirbe += caracterchar[i];
-        }
+        mostrar = aux;
+        aux = "";
+        cont = 0;
     }
 
     private void CodigoMorse(String caracter){
         switch (caracter) {
-            case "SPACE": imprimir += "  ";
+            case " ":
+            case "SPACE":
+                imprimir += " "; mostrar += " ";
                 break;
-            case "BACK_SPACE": enter();
+            case "BACK_SPACE": cont++; backspace();
                 break;
             case "ENTER": mostrar += "/"; imprimir += "\n";
                 break;
@@ -172,7 +170,7 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
                 break;
             case "Q": imprimir += "--.- "; mostrar += "Q";
                 break;
-            case "R": imprimir += ".-. "; mostrar += "Q";
+            case "R": imprimir += ".-. "; mostrar += "R";
                 break;
             case "S": imprimir += "... "; mostrar += "S";
                 break;
@@ -190,41 +188,58 @@ public class Parseador extends Stage implements EventHandler <KeyEvent>{
                 break;
             case "Z": imprimir += "--.. "; mostrar += "Z";
                 break;
-            case "DIGIT0": imprimir += "----- "; mostrar += "DIGIT0";
+            case "0":
+            case "DIGIT0": imprimir += "----- "; mostrar += "0";
                 break;
-            case "DIGIT1": imprimir += ".---- "; mostrar += "DIGIT1";
+            case "1":
+            case "DIGIT1": imprimir += ".---- "; mostrar += "1";
                 break;
-            case "DIGIT2": imprimir += "..--- "; mostrar += "DIGIT2";
+            case "2":
+            case "DIGIT2": imprimir += "..--- "; mostrar += "2";
                 break;
-            case "DIGIT3": imprimir += "...-- "; mostrar += "DIGIT3";
+            case "3":
+            case "DIGIT3": imprimir += "...-- "; mostrar += "3";
                 break;
-            case "DIGIT4": imprimir += "....- "; mostrar += "DIGIT4";
+            case "4":
+            case "DIGIT4": imprimir += "....- "; mostrar += "4";
                 break;
-            case "DIGIT5": imprimir += "..... "; mostrar += "DIGIT5";
+            case "5":
+            case "DIGIT5": imprimir += "..... "; mostrar += "5";
                 break;
-            case "DIGIT6": imprimir += "-.... "; mostrar += "DIGIT6";
+            case "6":
+            case "DIGIT6": imprimir += "-.... "; mostrar += "6";
                 break;
-            case "DIGIT7": imprimir += "--... "; mostrar += "DIGIT7";
+            case "7":
+            case "DIGIT7": imprimir += "--... "; mostrar += "7";
                 break;
-            case "DIGIT8": imprimir += "---.. "; mostrar += "DIGIT8";
+            case "8":
+            case "DIGIT8": imprimir += "---.. "; mostrar += "8";
                 break;
-            case "DIGIT9": imprimir += "----. "; mostrar += "DIGIT9";
+            case "9":
+            case "DIGIT9": imprimir += "----. "; mostrar += "9";
                 break;
-            case "PERIOD": imprimir += ".-.-.- ";
+            case ".":
+            case "PERIOD": imprimir += ".-.-.- "; mostrar += ".";
                 break;
-            case "COMMA": imprimir += "--..-- ";
+            case ",":
+            case "COMMA": imprimir += "--..-- "; mostrar += ",";
                 break;
-            case "QUOTE": imprimir += ".----. ";
+            case "'":
+            case "QUOTE": imprimir += ".----. "; mostrar += "'";
                 break;
-            case "MINUS": imprimir += "-....- ";
+            case "-":
+            case "MINUS": imprimir += "-....- "; mostrar += "-";
                 break;
             case "DIVIDE": imprimir += "-..-. ";
                 break;
-            case "BRACELEFT": imprimir += "-.--. ";
+            case "{":
+            case "BRACELEFT": imprimir += "-.--. "; mostrar += "{";
                 break;
-            case "BRACERIGHT": imprimir += "-.--.- ";
+            case "}":
+            case "BRACERIGHT": imprimir += "-.--.- "; mostrar += "}";
                 break;
-            case "PLUS": imprimir += ".-.-. ";
+            case "+":
+            case "PLUS": imprimir += ".-.-. "; mostrar += "+";
                 break;
             default:
                 break;
